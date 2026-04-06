@@ -1,40 +1,26 @@
-import React, { use } from 'react';
+import React, { use } from "react";
 
-const booksPromise= fetch('/booksData.json').then(res=>res.json())
+import BooksCard from "../UI/BooksCard";
+
+const booksPromise = fetch("/booksData.json").then((res) => res.json());
 
 const AllBooks = () => {
-    const books= use(booksPromise);
-    console.log(books)
-    return (
-        <div>
-         {
-            books.map(book=>{
-              return (
-                <div className="card bg-base-100 w-96 shadow-sm">
-  <figure>
-    <img
-      src={book.image}
-      alt="image" />
-  </figure>
-  <div className="card-body">
-    <div className='flex justify-between'>
-         {book.tags.map((tag) =>( <div className="badge badge-success font-serif text-white">Success {tag}</div>))}
+  const books = use(booksPromise);
+
+  return (
+    <div>
+      <h1 className="text-5xl text-center font-bold mb-10">Books</h1>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        {
+        books.map((book,ind) => {
+          return (
+            <BooksCard key={ind} book={book}/>
+          );
+        })}
+      </div>
     </div>
-    <h2 className="card-title text-2xl">
-    {book.bookName}
-    </h2>
-    <p className='font-semibold'>{book.author}</p>
-    <div className="card-actions justify-end">
-      <div className="badge badge-outline">Fashion</div>
-      <div className="badge badge-outline">Products</div>
-    </div>
-  </div>
-</div>
-              )
-            })
-         }
-        </div>
-    );
+  );
 };
 
 export default AllBooks;
