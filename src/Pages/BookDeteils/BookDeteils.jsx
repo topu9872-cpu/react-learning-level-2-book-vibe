@@ -1,8 +1,16 @@
+
+import { useContext} from "react";
 import { useLoaderData, useParams } from "react-router";
+import { BookProvider } from "../../Components/context/BookContext";
 
 const BookDeteils = () => {
   // just change the name of bookId
   const { bookId: bookParamsId } = useParams();
+
+//   that is a hook came from BookContext
+
+const {handleMarkAsRead}=useContext(BookProvider)
+
 
   const books = useLoaderData();
 
@@ -20,9 +28,13 @@ const BookDeteils = () => {
     publisher,
     yearOfPublishing,
   } = expectedBook;
+
+
+
+
   return (
     <div>
-      <div className="grid lg:grid-cols-2 bg-base-100 space-y-5 shadow-sm mt-10 w-10/12 container mx-auto mb-10 pb-6 ">
+      <div key={bookId} className="grid lg:grid-cols-2 bg-base-100 space-y-5 shadow-sm mt-10 w-10/12 container mx-auto mb-10 pb-6 ">
         <figure className=" bg-gray-100 rounded-2xl flex items-center py-10">
           <img className="max-w-70 mx-auto " src={image} alt={bookName} />
         </figure>
@@ -33,8 +45,8 @@ const BookDeteils = () => {
           <p>Review: {review}</p>
 
           <div className="flex justify-between ">
-            {tags.map((tag) => (
-              <div className=" badge  text-green-400 my-4 bg-green-100">
+            {tags.map((tag , ind) => (
+              <div key={ind} className=" badge  text-green-400 my-4 bg-green-100">
                 <p>{tag}</p>
               </div>
             ))}
@@ -54,7 +66,7 @@ const BookDeteils = () => {
               <span>{yearOfPublishing}</span>
             </div>
             <div className="flex items-center gap-4">
-              <button className="btn ">Mark as Read</button>
+              <button onClick={()=>handleMarkAsRead(expectedBook)} className="btn ">Mark as Read</button>
               <button className="btn btn-primary">Add to Wishlist</button>
             </div>
           </div>
