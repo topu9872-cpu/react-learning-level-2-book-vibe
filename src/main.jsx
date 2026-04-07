@@ -4,11 +4,13 @@ import "./index.css";
 import { RouterProvider } from "react-router";
 import { router } from "./routes/Routes";
 import BookContext from "./Components/context/BookContext";
+import { ToastContainer } from "react-toastify";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <BookContext>
       <RouterProvider router={router} />
+      <ToastContainer/>
     </BookContext>
   </StrictMode>,
 );

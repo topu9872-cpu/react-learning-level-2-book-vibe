@@ -9,7 +9,7 @@ const BookDeteils = () => {
 
 //   that is a hook came from BookContext
 
-const {handleMarkAsRead}=useContext(BookProvider)
+const {handleMarkAsRead,handleWishList}=useContext(BookProvider)
 
 
   const books = useLoaderData();
@@ -67,7 +67,7 @@ const {handleMarkAsRead}=useContext(BookProvider)
             </div>
             <div className="flex items-center gap-4">
               <button onClick={()=>handleMarkAsRead(expectedBook)} className="btn ">Mark as Read</button>
-              <button className="btn btn-primary">Add to Wishlist</button>
+              <button onClick={()=>handleWishList(expectedBook)} className="btn btn-primary">Add to Wishlist</button>
             </div>
           </div>
         </div>
